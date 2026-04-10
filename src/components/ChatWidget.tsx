@@ -22,6 +22,8 @@ export default function ChatWidget() {
         <div className="bg-white/95 backdrop-blur-2xl p-5 rounded-[2rem] shadow-[0_30px_70px_rgba(45,17,21,0.25)] border border-brand-gold/30 mb-2 pointer-events-auto animate-fade-up max-w-[260px] relative">
           <button 
             onClick={() => setShowNotification(false)}
+            title="Close notification"
+            aria-label="Close notification"
             className="absolute -top-3 -right-3 bg-brand-burgundy p-2 rounded-full text-brand-gold hover:bg-brand-gold hover:text-brand-burgundy transition-all shadow-xl border border-white/20"
           >
             <X className="w-3 h-3" />

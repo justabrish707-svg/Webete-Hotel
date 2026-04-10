@@ -215,7 +215,7 @@ export default function Admin() {
                   </div>
                </div>
             </div>
-            <button className="lg:hidden p-3 bg-white/5 rounded-xl text-white/40 hover:text-white transition-all shadow-inner" onClick={() => setIsMobileMenuOpen(false)}>
+            <button className="lg:hidden p-3 bg-white/5 rounded-xl text-white/40 hover:text-white transition-all shadow-inner" title="Close menu" aria-label="Close menu" onClick={() => setIsMobileMenuOpen(false)}>
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -296,6 +296,8 @@ export default function Admin() {
           <div className="flex items-center gap-6 w-full lg:w-auto">
             <button 
               className="lg:hidden p-4 bg-white/70 backdrop-blur-xl border border-white rounded-2xl hover:border-brand-gold shadow-premium transition-all"
+              title="Open menu"
+              aria-label="Open menu"
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Menu className="w-6 h-6 text-[#1a0a0c]" />
@@ -324,7 +326,7 @@ export default function Admin() {
               <Search className="w-6 h-6 text-slate-400 absolute left-5 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-brand-gold" />
             </div>
             
-            <button className="relative p-5 bg-white/60 backdrop-blur-2xl border-2 border-transparent rounded-[2rem] hover:border-brand-gold/50 transition-all shadow-premium group">
+            <button className="relative p-5 bg-white/60 backdrop-blur-2xl border-2 border-transparent rounded-[2rem] hover:border-brand-gold/50 transition-all shadow-premium group" title="Notifications" aria-label="Notifications">
               <Bell className="w-6 h-6 text-slate-600 group-hover:rotate-12 transition-transform" />
               <span className="absolute top-4 right-4 w-3 h-3 bg-rose-500 rounded-full border-2 border-white shadow-sm animate-pulse" />
             </button>
@@ -420,7 +422,7 @@ export default function Admin() {
                             </div>
                           </td>
                           <td className="py-8 px-10 text-right">
-                             <button className="p-4 bg-slate-50 hover:bg-[#1a0a0c] hover:text-brand-gold rounded-full text-slate-400 transition-all shadow-premium active:scale-95">
+                             <button className="p-4 bg-slate-50 hover:bg-[#1a0a0c] hover:text-brand-gold rounded-full text-slate-400 transition-all shadow-premium active:scale-95" title="View booking details" aria-label="View booking details">
                                <ArrowUpRight className="w-5 h-5" />
                              </button>
                           </td>
@@ -549,7 +551,7 @@ export default function Admin() {
                  <h3 className="text-2xl font-serif font-black tracking-tight">Manual Reservation</h3>
                  <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-60">Internal Admin Override</p>
               </div>
-              <button onClick={() => setIsManualBookingOpen(false)} className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all">
+              <button onClick={() => setIsManualBookingOpen(false)} title="Close" aria-label="Close booking form" className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all">
                 <X className="w-5 h-5 text-white" />
               </button>
             </div>
@@ -557,19 +559,19 @@ export default function Admin() {
             <form onSubmit={handleManualBookingSubmit} className="p-8 grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto max-h-[70vh] custom-scrollbar">
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Guest Full Name</label>
-                <input type="text" required value={manualBookingData.guestName} onChange={e => setManualBookingData(p => ({ ...p, guestName: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
+                <input type="text" required aria-label="Guest Full Name" placeholder="John Doe" value={manualBookingData.guestName} onChange={e => setManualBookingData(p => ({ ...p, guestName: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
               </div>
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Email Address</label>
-                <input type="email" required value={manualBookingData.email} onChange={e => setManualBookingData(p => ({ ...p, email: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
+                <input type="email" required aria-label="Email Address" placeholder="john@example.com" value={manualBookingData.email} onChange={e => setManualBookingData(p => ({ ...p, email: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
               </div>
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Phone Primary</label>
-                <input type="text" required value={manualBookingData.phone} onChange={e => setManualBookingData(p => ({ ...p, phone: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
+                <input type="text" required aria-label="Phone Number" placeholder="+251 ..." value={manualBookingData.phone} onChange={e => setManualBookingData(p => ({ ...p, phone: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
               </div>
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Room Inventory</label>
-                <select value={manualBookingData.roomType} onChange={e => setManualBookingData(p => ({ ...p, roomType: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold">
+                <select value={manualBookingData.roomType} title="Room Inventory" aria-label="Room Inventory" onChange={e => setManualBookingData(p => ({ ...p, roomType: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold">
                   <option value="Standard Room">Standard Unit</option>
                   <option value="Deluxe Room">Deluxe Lake View</option>
                   <option value="Executive Suite">Executive Suite</option>
@@ -578,11 +580,11 @@ export default function Admin() {
               </div>
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Arrival Date</label>
-                <input type="date" required value={manualBookingData.checkIn} onChange={e => setManualBookingData(p => ({ ...p, checkIn: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
+                <input type="date" required aria-label="Arrival Date" placeholder="Arrival date" value={manualBookingData.checkIn} onChange={e => setManualBookingData(p => ({ ...p, checkIn: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
               </div>
               <div className="space-y-4">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Departure Date</label>
-                <input type="date" required value={manualBookingData.checkOut} onChange={e => setManualBookingData(p => ({ ...p, checkOut: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
+                <input type="date" required aria-label="Departure Date" placeholder="Departure date" value={manualBookingData.checkOut} onChange={e => setManualBookingData(p => ({ ...p, checkOut: e.target.value }))} className="w-full px-6 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:border-brand-gold/50 focus:bg-white outline-none font-bold" />
               </div>
               <div className="space-y-4 col-span-1 md:col-span-2">
                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block pl-2">Operational Status</label>

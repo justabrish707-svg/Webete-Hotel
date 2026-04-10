@@ -175,6 +175,8 @@ export default function Gallery() {
           onClick={() => setSelectedImage(undefined)}
         >
           <button
+            title="Close lightbox"
+            aria-label="Close lightbox"
             className="absolute top-6 right-6 w-8 h-8 bg-white/10 hover:bg-brand-gold rounded-full flex items-center justify-center text-white transition-all z-[110]"
             onClick={(e) => { e.stopPropagation(); setSelectedImage(undefined); }}
           >

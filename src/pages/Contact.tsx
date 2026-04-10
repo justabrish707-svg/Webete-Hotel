@@ -316,7 +316,7 @@ export default function Contact() {
              <a 
                 href="https://maps.google.com/?q=Arbaminch,Ethiopia" 
                 target="_blank" 
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="btn-premium flex items-center justify-center gap-2"
              >
                 <Navigation className="w-4 h-4" /> Open map

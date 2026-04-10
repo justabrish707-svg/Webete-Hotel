@@ -548,7 +548,7 @@ export default function Booking() {
           <div className="absolute inset-0 bg-brand-burgundy/40 backdrop-blur-md animate-in fade-in duration-500" onClick={() => { setShowPayment(false); setPaymentError(''); }} />
           <div className="relative bg-white w-full max-w-lg p-6 md:p-10 rounded-[3rem] shadow-[0_40px_100px_rgba(0,0,0,0.3)] z-10 animate-in zoom-in slide-in-from-bottom-10 duration-500 border border-brand-gold/20">
             
-            <button onClick={() => { setShowPayment(false); setPaymentError(''); }} className="absolute top-8 right-8 p-3 text-gray-300 hover:text-brand-burgundy hover:bg-gray-50 rounded-full transition-all duration-300">
+            <button onClick={() => { setShowPayment(false); setPaymentError(''); }} title="Close payment modal" aria-label="Close payment modal" className="absolute top-8 right-8 p-3 text-gray-300 hover:text-brand-burgundy hover:bg-gray-50 rounded-full transition-all duration-300">
               <X className="w-6 h-6" />
             </button>
 

@@ -48,8 +48,8 @@
   /* ─── Global Image Quality Enhancement ─── */
   img {
     /* Optimize the algorithmic scaling of the image */
-    image-rendering: high-quality;
     image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
     /* Dramatically enhance all images dynamically while keeping original content */
     filter: brightness(1.02) contrast(1.06) saturate(1.1);
   }
@@ -106,8 +106,8 @@
     );
     background-size: 200% auto;
     color: #000;
-    background-clip: text;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: shine 4s linear infinite;
   }
@@ -135,8 +135,8 @@
 @layer components {
   .glass-card {
     background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
   }

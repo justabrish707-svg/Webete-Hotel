@@ -393,7 +393,7 @@ export default function Home() {
               style={{ maxWidth: '600px', minWidth: '288px' }}
             >
               <section>
-                <a target="_blank" href="https://www.tiktok.com/@wubetehotel.arbaminch?refer=creator_embed">@wubetehotel.arbaminch</a>
+                <a target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@wubetehotel.arbaminch?refer=creator_embed">@wubetehotel.arbaminch</a>
               </section>
             </blockquote>
           </div>
@@ -402,7 +402,7 @@ export default function Home() {
 
       {/* ── Final CTA ── */}
       <section className="relative py-20 bg-[#0d0407] overflow-hidden text-center">
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(ellipse at 50% 0%, rgba(196,164,132,0.1) 0%, transparent 60%)' }} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(196,164,132,0.1)_0%,transparent_60%)]" />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent" />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <p className="text-brand-gold/60 text-[10px] font-black tracking-[0.5em] uppercase mb-6">Your Next Chapter</p>
