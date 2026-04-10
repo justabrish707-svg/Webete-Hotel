@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /payment/callback
+
+Sitemap: https://wubetehotel.com/sitemap.xml
