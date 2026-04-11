@@ -18,8 +18,7 @@ export default function About() {
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
-          style={{ backgroundImage: 'url(/building_night_1.png)' }}
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/building_night_1.png)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />
@@ -111,7 +110,7 @@ export default function About() {
               { icon: Users, title: 'Community', desc: 'Empowering local staff and celebrating culture.' },
               { icon: Award, title: 'Excellence', desc: 'Uncompromising commitment to high standards.' }
             ].map((val, i) => (
-              <div key={i} className="glass-card !border-white/10 !bg-white/5 p-8 rounded-[2rem] hover:!bg-brand-gold transition-all duration-500 group fade-up" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div key={i} className={`glass-card !border-white/10 !bg-white/5 p-8 rounded-[2rem] hover:!bg-brand-gold transition-all duration-500 group fade-up stagger-${i + 1}`}>
                 <div className="w-12 h-12 bg-brand-gold/10 group-hover:bg-brand-burgundy rounded-[1rem] flex items-center justify-center mb-6 transition-colors shadow-inner mx-auto">
                   <val.icon className="w-6 h-6 text-brand-gold group-hover:text-white" />
                 </div>

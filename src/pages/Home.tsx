@@ -386,11 +386,10 @@ export default function Home() {
           <p className="text-brand-burgundy/60 text-xs font-black tracking-[0.4em] uppercase mb-4">Connect With Us</p>
           <div className="flex justify-center w-full">
             <blockquote
-              className="tiktok-embed"
+              className="tiktok-embed max-w-[600px] min-w-[288px]"
               cite="https://www.tiktok.com/@wubetehotel.arbaminch"
               data-unique-id="wubetehotel.arbaminch"
               data-embed-type="creator"
-              style={{ maxWidth: '600px', minWidth: '288px' }}
             >
               <section>
                 <a target="_blank" rel="noopener noreferrer" href="https://www.tiktok.com/@wubetehotel.arbaminch?refer=creator_embed">@wubetehotel.arbaminch</a>

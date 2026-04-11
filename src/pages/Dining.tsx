@@ -153,8 +153,7 @@ export default function Dining() {
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
-          style={{ backgroundImage: 'url(/assets/dining_hd.png)' }}
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/assets/dining_hd.png)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/80" />
@@ -305,12 +304,11 @@ export default function Dining() {
                 ))}
                 {/* Category Indicator */}
                 <div
-                  className="absolute top-0 bottom-0 bg-brand-gold rounded-full transition-all duration-500 shadow-xl"
-                  style={{
-                    left: `${categories.findIndex(c => c.name === activeCategory) * 25}%`,
-                    width: '25%',
-                    opacity: activeCategory ? 1 : 0
-                  }}
+                  className={`absolute top-0 bottom-0 bg-brand-gold rounded-full transition-all duration-500 shadow-xl w-1/4 ${
+                    activeCategory === 'Traditional' ? 'left-0' : 
+                    activeCategory === 'International' ? 'left-[25%]' : 
+                    activeCategory === 'Beverages' ? 'left-[50%]' : 'left-[75%]'
+                  }`}
                 />
               </div>
             </div>
@@ -318,7 +316,7 @@ export default function Dining() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
             {filteredItems.map((dish, i) => (
-              <div key={i} className="group animate-fade-in bg-white/5 rounded-[1.25rem] md:rounded-[1.5rem] p-2 md:p-3 border border-white/10 hover:bg-white/10 transition-all duration-500 shadow-xl hover:shadow-2xl flex flex-col h-full" style={{ animationDelay: `${i * 100}ms` }}>
+              <div key={i} className={`group animate-fade-in bg-white/5 rounded-[1.25rem] md:rounded-[1.5rem] p-2 md:p-3 border border-white/10 hover:bg-white/10 transition-all duration-500 shadow-xl hover:shadow-2xl flex flex-col h-full stagger-${i + 1}`}>
                 <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-3 md:mb-4 shadow-inner bg-black/20 shrink-0">
                   <img
                     src={dish.image}

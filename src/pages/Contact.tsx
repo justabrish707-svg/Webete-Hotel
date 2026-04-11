@@ -74,8 +74,7 @@ export default function Contact() {
       {/* ── Editorial Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div 
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
-          style={{ backgroundImage: 'url(/building_night_1.png)' }}
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/building_night_1.png)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />
@@ -313,14 +312,14 @@ export default function Contact() {
                   Find Your <span className="text-brand-gold">Way</span>
                 </h2>
              </div>
-             <a 
+              <a 
                 href="https://maps.google.com/?q=Arbaminch,Ethiopia" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn-premium flex items-center justify-center gap-2"
-             >
+              >
                 <Navigation className="w-4 h-4" /> Open map
-             </a>
+              </a>
           </div>
           
           <div className="rounded-[2rem] overflow-hidden shadow-2xl h-[550px] border-4 border-white relative group fade-up stagger-1">

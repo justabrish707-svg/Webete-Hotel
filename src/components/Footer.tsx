@@ -77,7 +77,7 @@ export default function Footer() {
 
       {/* ── Top CTA band ── */}
       <div className="relative bg-brand-burgundy overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url(/building_night_1.png)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
+        <div className="absolute inset-0 opacity-10 bg-[url(/building_night_1.png)] bg-cover bg-center" />
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6 py-3 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">

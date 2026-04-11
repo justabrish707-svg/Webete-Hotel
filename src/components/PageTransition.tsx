@@ -26,7 +26,7 @@ export default function PageTransition({ children }: Props) {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ willChange: 'opacity, transform' }}
+      className="will-change-[opacity,transform]"
     >
       {children}
     </motion.div>

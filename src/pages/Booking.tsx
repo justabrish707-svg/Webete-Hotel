@@ -224,8 +224,7 @@ export default function Booking() {
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[25vh] min-h-[180px] overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center ken-burns-slow"
-          style={{ backgroundImage: 'url(/webete_bedroom_1.jpg)' }}
+          className="absolute inset-0 bg-cover bg-center ken-burns-slow bg-[url(/webete_bedroom_1.jpg)]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-brand-offwhite" />
         

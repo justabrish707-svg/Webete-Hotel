@@ -477,22 +477,21 @@ export default function Admin() {
                    <h3 className="text-3xl font-serif font-black text-[#1a0a0c] mb-10 tracking-tight flex items-center gap-4">
                       Directives <span className="w-full h-px bg-gradient-to-r from-brand-gold to-transparent opacity-30" />
                    </h3>
-                    <div className="grid grid-cols-2 gap-6">
+<div className="grid grid-cols-2 gap-6">
                        {[
-                         { label: 'New Booking', icon: Plus, action: () => setIsManualBookingOpen(true), bg: 'brand-burgundy', color: 'brand-gold' },
-                         { label: 'Broadcast', icon: Bell, action: () => setActiveTab('messages'), bg: 'white', color: 'slate-800' },
-                         { label: 'Guest Search', icon: Search, action: () => setActiveTab('guests'), bg: 'brand-gold', color: '#1a0a0c' },
-                         { label: 'Export Data', icon: Download, action: () => exportToCSV(bookings, 'full_data'), bg: 'emerald-500', color: 'white' },
+                         { label: 'New Booking', icon: Plus, action: () => setIsManualBookingOpen(true), bg: 'bg-brand-burgundy', color: 'text-brand-gold' },
+                         { label: 'Broadcast', icon: Bell, action: () => setActiveTab('messages'), bg: 'bg-white', color: 'text-slate-800' },
+                         { label: 'Guest Search', icon: Search, action: () => setActiveTab('guests'), bg: 'bg-brand-gold', color: 'text-[#1a0a0c]' },
+                         { label: 'Export Data', icon: Download, action: () => exportToCSV(bookings, 'full_data'), bg: 'bg-emerald-500', color: 'text-white' },
                        ].map((btn, i) => (
                          <button 
                            key={i} 
                            onClick={btn.action} 
-                           className={`p-6 h-40 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:scale-105 hover:shadow-2xl active:scale-95 group/btn relative overflow-hidden border border-slate-100 shadow-premium`}
-                           style={{ backgroundColor: btn.bg === 'white' ? 'white' : btn.bg === 'brand-burgundy' ? '#2D1115' : btn.bg === 'brand-gold' ? '#D4AF37' : '#10b981' }}
+                           className={`p-6 h-40 rounded-[2.5rem] flex flex-col items-center justify-center gap-4 transition-all duration-500 hover:scale-105 hover:shadow-2xl active:scale-95 group/btn relative overflow-hidden border border-slate-100 shadow-premium ${btn.bg}`}
                          >
                             <div className="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-10 transition-opacity" />
-                            <btn.icon className="w-10 h-10 group-hover/btn:rotate-12 group-hover/btn:scale-125 transition-transform duration-700 relative z-10" style={{ color: btn.color }} />
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-center relative z-10 leading-tight" style={{ color: btn.color }}>{btn.label}</span>
+                            <btn.icon className={`w-10 h-10 group-hover/btn:rotate-12 group-hover/btn:scale-125 transition-transform duration-700 relative z-10 ${btn.color}`} />
+                            <span className={`text-[10px] font-black uppercase tracking-[0.3em] text-center relative z-10 leading-tight ${btn.color}`}>{btn.label}</span>
                          </button>
                        ))}
                     </div>

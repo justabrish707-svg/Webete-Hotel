@@ -68,8 +68,7 @@ export default function Services() {
       {/* ── Editorial Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
-          style={{ backgroundImage: 'url(/hall_facility_1.png)' }}
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/hall_facility_1.png)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />

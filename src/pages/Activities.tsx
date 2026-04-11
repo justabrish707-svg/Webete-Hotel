@@ -48,8 +48,7 @@ export default function Activities() {
       {/* ── Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div 
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
-          style={{ backgroundImage: 'url(/assets/nature_safari_hd.png)' }}
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/assets/nature_safari_hd.png)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />
@@ -97,7 +96,7 @@ export default function Activities() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mainActivities.map((act, i) => (
-              <div key={i} className="fade-up premium-card group flex flex-col overflow-hidden !p-2" style={{ transitionDelay: `${i * 150}ms` }}>
+              <div key={i} className={`fade-up premium-card group flex flex-col overflow-hidden !p-2 stagger-${i + 1}`}>
                 <div className="h-64 overflow-hidden relative rounded-[1rem] aspect-[4/3] shadow-inner">
                   <img src={act.image} alt={act.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
@@ -160,7 +159,7 @@ export default function Activities() {
               { title: 'Sunset Views', desc: 'Overlooking both Lake Chamo and Abaya.', icon: Map },
               { title: 'Coffee Ritual', desc: 'Authentic Arba Minch coffee roasting.', icon: Coffee }
             ].map((item, i) => (
-              <div key={i} className="fade-up p-8 glass-card !border-white/10 !bg-white/5 group flex flex-col items-center text-center hover:!bg-brand-gold hover:-translate-y-2 transition-all duration-500" style={{ transitionDelay: `${i * 50}ms` }}>
+              <div key={i} className={`fade-up p-8 glass-card !border-white/10 !bg-white/5 group flex flex-col items-center text-center hover:!bg-brand-gold hover:-translate-y-2 transition-all duration-500 stagger-${i + 1}`} >
                 <div className="w-14 h-14 bg-white/10 backdrop-blur-xl rounded-2xl flex items-center justify-center mb-6 group-hover:bg-white group-hover:shadow-xl transition-all duration-500">
                   <item.icon className="w-6 h-6 text-brand-gold group-hover:text-brand-burgundy" />
                 </div>
