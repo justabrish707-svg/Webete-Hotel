@@ -82,14 +82,17 @@
 @layer utilities {
   .font-serif { font-family: 'Playfair Display', Georgia, serif; }
   .text-balance { 
-    text-wrap: balance;
-    /* Fallback for older browsers */
-    word-break: break-word;
+    word-break: break-word; /* Safe fallback */
+  }
+  @supports (text-wrap: balance) {
+    .text-balance { text-wrap: balance; }
   }
 
   .no-scrollbar { 
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  @supports (scrollbar-width: none) {
+    .no-scrollbar { scrollbar-width: none; }
   }
   .no-scrollbar::-webkit-scrollbar { 
     display: none; 

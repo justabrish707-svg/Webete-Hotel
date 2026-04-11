@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2, Navigation } from 'lucide-react';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
@@ -278,7 +278,7 @@ export default function Contact() {
                 <div className="pt-4">
                    <button
                      type="submit"
-                     disabled={status === 'loading' || status === 'success'}
+                     disabled={status === 'loading'}
                      className="w-full bg-[#2d1115] text-[#fefaf0] px-8 py-6 rounded-[1.5rem] hover:bg-brand-gold hover:text-brand-burgundy transition-all duration-500 font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 shadow-[0_15px_30px_rgba(45,17,21,0.15)] disabled:opacity-50 group hover:shadow-[0_15px_30px_rgba(196,164,132,0.3)] active:scale-95"
                    >
                      {status === 'loading' ? (
