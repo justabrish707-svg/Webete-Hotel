@@ -60,7 +60,7 @@ export default function Header() {
               <div className="relative w-10 h-10 shrink-0 overflow-hidden rounded-[0.6rem] shadow-[0_0_30px_rgba(196,164,132,0.3)] border border-[#c4a484]/40 group-hover:border-[#c4a484] transition-all duration-700 bg-gradient-to-br from-[#2d1115] to-[#1a0a0c] p-0.5 group-hover:scale-105 group-hover:-rotate-3">
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-transparent translate-y-[-100%] group-hover:translate-y-[100%] transition-transform duration-1000" />
                 <img 
-                  src="/logo_mark.jpg" 
+                  src="/images/branding/logomark.webp" 
                   alt="Logo" 
                   className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700 rounded-[0.5rem]" 
                 />

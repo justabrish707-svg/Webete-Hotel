@@ -4,8 +4,13 @@ const TawkChat = () => {
     useEffect(() => {
         // Tawk.to Script Integration
         // Replace 'YOUR_PROPERTY_ID' and 'YOUR_WIDGET_ID' with your actual IDs from tawk.to dashboard
-        const propertyId = import.meta.env.VITE_TAWK_PROPERTY_ID || '67ed6249430c0019253457a4'; // Placeholder ID
-        const widgetId = import.meta.env.VITE_TAWK_WIDGET_ID || '1imtgec66'; // Placeholder ID
+        const propertyId = import.meta.env.VITE_TAWK_PROPERTY_ID;
+        const widgetId = import.meta.env.VITE_TAWK_WIDGET_ID;
+
+        // Skip loading if IDs are placeholders or missing
+        if (!propertyId || !widgetId || propertyId === '67ed6249430c0019253457a4') {
+            return;
+        }
 
         const s1 = document.createElement("script");
         const s0 = document.getElementsByTagName("script")[0];

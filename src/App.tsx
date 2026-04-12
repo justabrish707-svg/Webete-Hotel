@@ -54,6 +54,7 @@ function App() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session) {
         useHotelStore.setState({ isAuthenticated: true });
+        useHotelStore.getState().initializeStore().catch(console.error);
       }
       if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED' && !session) {
         useHotelStore.setState({ isAuthenticated: false });
@@ -66,7 +67,7 @@ function App() {
   const LoadingFallback = () => (
     <div className="fixed inset-0 bg-[#0d0407] flex flex-col items-center justify-center z-50">
       <div className="w-12 h-12 rounded-2xl overflow-hidden border border-brand-gold/30 shadow-2xl bg-brand-burgundy/30 flex items-center justify-center mb-6 animate-pulse">
-        <img src="/logo_mark.jpg" alt="Wubeté Loading" className="w-full h-full object-contain p-2" />
+        <img src="/images/branding/logomark.webp" alt="Wubeté Loading" className="w-full h-full object-contain p-2" />
       </div>
       <div className="flex items-center gap-2">
         <span className="w-2 h-2 rounded-full bg-brand-gold animate-bounce [animation-delay:0ms]" />

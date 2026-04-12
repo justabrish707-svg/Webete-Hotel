@@ -57,6 +57,8 @@ interface HotelState {
   messages: Message[];
   addMessage: (message: Omit<Message, 'id' | 'read' | 'createdAt'>) => Promise<void>;
   markMessageAsRead: (id: string) => Promise<void>;
+  deleteBooking: (id: string) => Promise<void>;
+  deleteMessage: (id: string) => Promise<void>;
 }
 
 export const useHotelStore = create<HotelState>()(
@@ -266,11 +268,11 @@ export const useHotelStore = create<HotelState>()(
       },
 
       rooms: [
-        { id: '101', name: 'Standard Unit A', type: 'Standard Room', price: 1500, capacity: 2, available: true, image: '/webete_bedroom_1.jpg' },
-        { id: '102', name: 'Standard Unit B', type: 'Standard Room', price: 1500, capacity: 2, available: false, image: '/webete_bedroom_1.jpg' },
-        { id: '201', name: 'Deluxe Lake View', type: 'Deluxe Room', price: 2150, capacity: 2, available: true, image: '/deluxe_room_2.webp' },
-        { id: '202', name: 'Executive Suite', type: 'Executive Suite', price: 3450, capacity: 2, available: true, image: '/webete_bedroom_3.jpg' },
-        { id: '301', name: 'Family Villa', type: 'Family Suite', price: 4200, capacity: 4, available: true, image: '/executive_suite_1774779542015.png' },
+        { id: '101', name: 'Standard Unit A', type: 'Standard Room', price: 1500, capacity: 2, available: true, image: '/images/rooms/webetebedroom1.webp' },
+        { id: '102', name: 'Standard Unit B', type: 'Standard Room', price: 1500, capacity: 2, available: false, image: '/images/rooms/webetebedroom1.webp' },
+        { id: '201', name: 'Deluxe Lake View', type: 'Deluxe Room', price: 2150, capacity: 2, available: true, image: '/images/rooms/roomdeluxev2.webp' },
+        { id: '202', name: 'Executive Suite', type: 'Executive Suite', price: 3450, capacity: 2, available: true, image: '/images/rooms/webetebedroom3.webp' },
+        { id: '301', name: 'Family Villa', type: 'Family Suite', price: 4200, capacity: 4, available: true, image: '/images/rooms/executivesuite1774779542015.webp' },
       ],
 
       toggleRoomAvailability: async (id) => {
@@ -328,6 +330,20 @@ export const useHotelStore = create<HotelState>()(
         set((state) => ({
           messages: state.messages.map(m => m.id === id ? { ...m, read: true } : m),
         }));
+      },
+      
+      deleteBooking: async (id) => {
+        if (isSupabaseConfigured) {
+          await supabase.from('bookings').delete().eq('id', id);
+        }
+        set((state) => ({ bookings: state.bookings.filter(b => b.id !== id) }));
+      },
+
+      deleteMessage: async (id) => {
+        if (isSupabaseConfigured) {
+          await supabase.from('messages').delete().eq('id', id);
+        }
+        set((state) => ({ messages: state.messages.filter(m => m.id !== id) }));
       },
     }),
     {

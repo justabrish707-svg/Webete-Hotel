@@ -40,21 +40,21 @@ export default function Home() {
     {
       name: t('home.rooms.standard'),
       price: '1,500',
-      image: '/webete_bedroom_1.jpg',
+      image: '/images/rooms/webetebedroom1.webp',
       description: t('home.rooms.standard_desc'),
       badge: 'Highly Rated',
     },
     {
       name: t('home.rooms.deluxe'),
       price: '2,150',
-      image: '/deluxe_room_2.webp',
+      image: '/images/rooms/deluxeroom2.webp',
       description: t('home.rooms.deluxe_desc'),
       badge: 'Best Value',
     },
     {
       name: t('home.rooms.executive'),
       price: '3,450',
-      image: '/webete_bedroom_3.jpg',
+      image: '/images/rooms/webetebedroom3.webp',
       description: t('home.rooms.executive_desc'),
       badge: 'Honeymoon Choice',
     },
@@ -95,17 +95,17 @@ export default function Home() {
     {
       title: t('home.exp.lake'),
       desc: t('home.exp.lake_desc'),
-      image: '/hippo_chamo.jpg',
+      image: '/images/activities/hippochamo.webp',
     },
     {
       title: t('home.exp.park'),
       desc: t('home.exp.park_desc'),
-      image: '/nechisar_zebra_1.png',
+      image: '/images/activities/nechisarzebra1.webp',
     },
     {
       title: t('home.exp.dorze'),
       desc: t('home.exp.dorze_desc'),
-      image: '/dorze_1.png',
+      image: '/images/activities/dorze1.webp',
     },
   ];
 
@@ -126,9 +126,9 @@ export default function Home() {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
-            poster="/assets/hero_hd.png"
+            poster="/images/hero/herohd.webp"
           >
-            <source src="/hero_video.mp4" type="video/mp4" />
+            <source src="/images/hero/hero_video.mp4" type="video/mp4" />
           </video>
           
           <div className="absolute inset-0 bg-[#0d0407]/60" />

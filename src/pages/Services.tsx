@@ -68,7 +68,7 @@ export default function Services() {
       {/* ── Editorial Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/hall_facility_1.png)]"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/images/hero/hallfacility1.webp)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />
@@ -146,7 +146,7 @@ export default function Services() {
               <div className="absolute -inset-6 bg-brand-gold/10 rounded-[2rem] -rotate-3 border border-white/5" />
               <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-[4px] border-white/10 group aspect-[4/3]">
                 <img
-                  src="/hall_facility_1.png"
+                  src="/images/hero/hallfacility1.webp"
                   alt="Wubeté Conference Facilities"
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
                 />

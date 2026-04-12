@@ -13,7 +13,7 @@ export default function Rooms() {
       name: t('rooms.types.standard.name'),
       title: t('rooms.types.standard.title'),
       price: '1,500',
-      image: '/webete_bedroom_1.jpg',
+      image: '/images/rooms/webetebedroom1.webp',
       description: t('rooms.types.standard.desc'),
       maxOccupancy: 2,
       size: '25 sqm',
@@ -32,7 +32,7 @@ export default function Rooms() {
       name: t('rooms.types.deluxe.name'),
       title: t('rooms.types.deluxe.title'),
       price: '2150',
-      image: '/deluxe_room_2.webp',
+      image: '/images/rooms/deluxeroom2.webp',
       description: t('rooms.types.deluxe.desc'),
       maxOccupancy: 3,
       size: '35 sqm',
@@ -51,7 +51,7 @@ export default function Rooms() {
       name: t('rooms.types.executive.name'),
       title: t('rooms.types.executive.title'),
       price: '3450',
-      image: '/webete_bedroom_3.jpg',
+      image: '/images/rooms/webetebedroom3.webp',
       description: t('rooms.types.executive.desc'),
       maxOccupancy: 4,
       size: '55 sqm',
@@ -73,12 +73,12 @@ export default function Rooms() {
         title="Luxury Suites & Rooms"
         description="Explore our curated collection of premium suites at Arba Minch Wubeté Hotel — from standard garden-view rooms to executive Rift Valley suites."
         path="/rooms"
-        image="https://wubetehotel.com/webete_bedroom_3.jpg"
+        image="https://wubetehotel.com/images/rooms/webetebedroom3.webp"
       />
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div 
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/webete_bedroom_3.jpg)]"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/images/rooms/webetebedroom3.webp)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />

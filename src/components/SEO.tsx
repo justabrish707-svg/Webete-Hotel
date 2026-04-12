@@ -8,7 +8,7 @@ interface SEOProps {
 }
 
 const BASE_URL = 'https://wubetehotel.com';
-const DEFAULT_IMAGE = `${BASE_URL}/hero_background_1774779471815.png`;
+const DEFAULT_IMAGE = `${BASE_URL}/images/gallery/herobackground1774779471815.webp`;
 
 export default function SEO({ title, description, path = '', image = DEFAULT_IMAGE }: SEOProps) {
   const fullUrl = `${BASE_URL}${path}`;

@@ -23,23 +23,23 @@ export default function Gallery() {
   ];
 
   const images = [
-    { src: '/webete_bedroom_1.jpg',           category: 'rooms',   title: 'Legacy Standard' },
-    { src: '/deluxe_room_2.webp',             category: 'rooms',   title: 'Deluxe Lake View' },
-    { src: '/webete_bedroom_3.jpg',           category: 'rooms',   title: 'Executive Retreat' },
-    { src: '/assets/dining_hd.png',           category: 'dining',  title: 'Grand Dining' },
-    { src: '/spacial_kurt.png',               category: 'dining',  title: 'Chef Special' },
-    { src: '/traditional_food_detail_1.png',  category: 'dining',  title: 'Traditional Detail' },
-    { src: '/grilled-fish.jpg',               category: 'dining',  title: 'Lake Catch' },
-    { src: '/food_traditional_2.jpg',         category: 'dining',  title: 'Authentic Platter' },
-    { src: '/assets/nature_safari_hd.png',    category: 'nature',  title: 'Rift Valley Safari' },
-    { src: '/nechisar_park_1.jpg',            category: 'nature',  title: 'Nechisar Plains' },
-    { src: '/hippo_chamo.jpg',                category: 'nature',  title: 'River Safari' },
-    { src: '/lake_chamo_crocodile.jpg',       category: 'nature',  title: 'Wild Encounter' },
-    { src: '/nechisar_zebra_1.png',           category: 'nature',  title: 'Savannah Life' },
-    { src: '/dorze_village_1_1.png',          category: 'culture', title: 'Village Life' },
-    { src: '/dorze_children.jpg',             category: 'culture', title: 'Local Smiles' },
-    { src: '/dorze_1.png',                    category: 'culture', title: 'Ancestral Roots' },
-    { src: '/building_night_1.png',           category: 'culture', title: 'Wubeté at Night' },
+    { src: '/images/rooms/webetebedroom1.webp',           category: 'rooms',   title: 'Legacy Standard' },
+    { src: '/images/rooms/deluxeroom2.webp',             category: 'rooms',   title: 'Deluxe Lake View' },
+    { src: '/images/rooms/webetebedroom3.webp',           category: 'rooms',   title: 'Executive Retreat' },
+    { src: '/images/gallery/dininghd.webp',                 category: 'dining',  title: 'Grand Dining' },
+    { src: '/images/dining/spacialkurt.webp',               category: 'dining',  title: 'Chef Special' },
+    { src: '/images/dining/traditionalfooddetail1.webp',  category: 'dining',  title: 'Traditional Detail' },
+    { src: '/images/dining/grilled-fish.webp',               category: 'dining',  title: 'Lake Catch' },
+    { src: '/images/dining/foodtraditional2.webp',         category: 'dining',  title: 'Authentic Platter' },
+    { src: '/images/gallery/naturesafarihd.webp',    category: 'nature',  title: 'Rift Valley Safari' },
+    { src: '/images/activities/nechisarpark1.webp',            category: 'nature',  title: 'Nechisar Plains' },
+    { src: '/images/activities/hippochamo.webp',                category: 'nature',  title: 'River Safari' },
+    { src: '/images/activities/lakechamocrocodile.webp',       category: 'nature',  title: 'Wild Encounter' },
+    { src: '/images/activities/nechisarzebra1.webp',           category: 'nature',  title: 'Savannah Life' },
+    { src: '/images/activities/dorzevillage11.webp',          category: 'culture', title: 'Village Life' },
+    { src: '/images/activities/dorzechildren.webp',             category: 'culture', title: 'Local Smiles' },
+    { src: '/images/activities/dorze1.webp',                    category: 'culture', title: 'Ancestral Roots' },
+    { src: '/images/hero/buildingnight1.webp',           category: 'culture', title: 'Wubeté at Night' },
   ];
 
   const filteredImages = activeCategory === 'all'
@@ -52,13 +52,13 @@ export default function Gallery() {
         title="Photo Gallery"
         description="Browse stunning photography of Arba Minch Wubeté Hotel — luxury suites, authentic Ethiopian cuisine, Lake Chamo safari scenes, and local culture."
         path="/gallery"
-        image="https://wubetehotel.com/hippo_chamo.jpg"
+        image="https://wubetehotel.com/images/activities/hippochamo.webp"
       />
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div className="absolute inset-0">
           <img
-            src="/assets/nature_safari_hd.png"
+            src="/images/gallery/naturesafarihd.webp"
             alt="Gallery Hero"
             className="w-full h-full object-cover scale-105 animate-[ken-burns_25s_ease-infinite_alternate]"
           />

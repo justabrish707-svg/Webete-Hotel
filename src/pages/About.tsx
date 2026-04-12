@@ -13,12 +13,12 @@ export default function About() {
         title="Our 63-Year Legacy"
         description="Learn about the story of Arba Minch Wubeté Hotel — founded in 1962 and reborn as a modern luxury destination in the heart of the Ethiopian Rift Valley."
         path="/about"
-        image="https://wubetehotel.com/building_night_1.png"
+        image="https://wubetehotel.com/images/hero/buildingnight1.webp"
       />
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/building_night_1.png)]"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/images/hero/buildingnight1.webp)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />
@@ -55,7 +55,7 @@ export default function About() {
             <div className="relative fade-up stagger-1">
               <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-[6px] border-white/20 group aspect-[4/3]">
                 <img
-                  src="/building_night_1.png"
+                  src="/images/hero/buildingnight1.webp"
                   alt="Wubeté Hotel"
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-105"
                 />

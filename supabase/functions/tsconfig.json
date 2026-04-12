@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "types": ["deno"],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}

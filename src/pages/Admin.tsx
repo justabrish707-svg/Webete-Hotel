@@ -15,15 +15,12 @@ import {
   CheckCircle2,
   Clock,
   Ban,
-  User,
   ShieldCheck,
   Menu,
   X,
-  Eye,
-  EyeOff,
-  Lock,
   Key,
-  AlertTriangle
+  AlertTriangle,
+  Mail
 } from 'lucide-react';
 
 import { useHotelStore } from '../store/useHotelStore';
@@ -34,51 +31,15 @@ export default function Admin() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { bookings, rooms, messages, logout, updateBookingStatus, toggleRoomAvailability, markMessageAsRead, addBooking, isLockdownActive, toggleLockdown, updateAdminPassword } = useHotelStore();
+  const { 
+    bookings, rooms, messages, logout, toggleRoomAvailability, 
+    addBooking, updateBookingStatus, deleteBooking, markMessageAsRead, 
+    deleteMessage, isLockdownActive, toggleLockdown 
+  } = useHotelStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [isManualBookingOpen, setIsManualBookingOpen] = useState(false);
-  
-  // Security logic
-  const [passwords, setPasswords] = useState({ current: '', new: '', confirm: '' });
-  const [showPasswords, setShowPasswords] = useState({ current: false, new: false, confirm: false });
-  const [passwordStatus, setPasswordStatus] = useState({ message: '', type: '' as 'success' | 'error' | '' });
-  const [isChangingPassword, setIsChangingPassword] = useState(false);
 
-  const getPasswordStrength = (pass: string) => {
-    if (!pass) return 0;
-    let strength = 0;
-    if (pass.length > 8) strength += 25;
-    if (/[A-Z]/.test(pass)) strength += 25;
-    if (/[0-9]/.test(pass)) strength += 25;
-    if (/[^A-Za-z0-9]/.test(pass)) strength += 25;
-    return strength;
-  };
 
-  const handlePasswordChange = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPasswordStatus({ message: '', type: '' });
-
-    if (passwords.new !== passwords.confirm) {
-      setPasswordStatus({ message: 'New passwords do not match', type: 'error' });
-      return;
-    }
-
-    if (passwords.new.length < 8) {
-      setPasswordStatus({ message: 'Password must be at least 8 characters', type: 'error' });
-      return;
-    }
-
-    setIsChangingPassword(true);
-    const success = await updateAdminPassword(passwords.new);
-    setIsChangingPassword(false);
-
-    if (success) {
-      setPasswordStatus({ message: 'System access code updated successfully', type: 'success' });
-      setPasswords({ current: '', new: '', confirm: '' });
-    } else {
-      setPasswordStatus({ message: 'Failed to update. Ensure you are authenticated via Supabase.', type: 'error' });
-    }
-  };
   const [manualBookingData, setManualBookingData] = useState({
     guestName: '',
     email: '',
@@ -99,16 +60,7 @@ export default function Admin() {
     b.id.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const filteredRooms = rooms.filter(r => 
-    r.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    r.type.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
-  const filteredMessages = messages.filter(m => 
-    m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    m.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    m.message.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   const handleManualBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -182,7 +134,7 @@ export default function Admin() {
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-gradient-to-br from-brand-gold/10 to-transparent rounded-full blur-[150px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-gradient-to-tl from-brand-burgundy/5 to-transparent rounded-full blur-[150px]" />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-brand-gold/5 via-transparent to-brand-burgundy/5 opacity-40 mix-blend-overlay" />
       </div>
 
       {/* ── Mobile Overlay ── */}
@@ -203,7 +155,7 @@ export default function Admin() {
                <div className="flex items-center gap-5 relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-gold via-[#eab308] to-brand-gold p-0.5 shadow-2xl transform group-hover:rotate-[10deg] transition-all duration-500">
                     <div className="w-full h-full bg-[#1a0a0c] rounded-[14px] flex items-center justify-center p-2 overflow-hidden">
-                       <img src="/logo_mark.jpg" alt="Logo" className="w-full h-full object-contain" />
+                       <img src="/images/branding/logomark.webp" alt="Logo" className="w-full h-full object-contain" />
                     </div>
                   </div>
                   <div>
@@ -346,7 +298,7 @@ export default function Admin() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
                 { label: 'Total Revenue', icon: ArrowUpRight, value: `${bookings.filter(b => b.status === 'Confirmed').reduce((sum, b) => sum + b.amount, 0).toLocaleString()} ETB`, trend: '+18.4%', trendUp: true, color: 'emerald' },
-                { label: 'Unit Occupancy', icon: BedDouble, value: `${Math.round((rooms.filter(r => !r.available).length / rooms.length) * 100)}%`, trend: `${rooms.filter(r => !r.available).length} busy`, trendUp: null, color: 'brand-gold' },
+                { label: 'Unit Occupancy', icon: BedDouble, value: `${Math.round((rooms.filter(r => !r.available).length / (rooms.length || 1)) * 100)}%`, trend: `${rooms.filter(r => !r.available).length} busy`, trendUp: null, color: 'brand-gold' },
                 { label: 'Active Inquiries', icon: MessageSquare, value: messages.filter(m => !m.read).length.toString(), trend: 'Immediate', trendUp: false, color: 'amber' },
                 { label: 'Verified Guests', icon: Users, value: new Set(bookings.map(b => b.email)).size.toString(), trend: '+5 new', trendUp: true, color: 'blue' },
               ].map((stat, i) => (
@@ -388,15 +340,16 @@ export default function Admin() {
                 <div className="overflow-x-auto p-2">
                   <table className="w-full text-left">
                     <thead>
-                      <tr className="bg-slate-50/50">
+                      <tr className="border-b border-slate-50 hover:bg-transparent">
                         <th className="py-8 px-10 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Resident Identity</th>
                         <th className="py-8 px-10 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Asset Allocation</th>
                         <th className="py-8 px-10 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Status Verification</th>
-                        <th className="py-8 px-10 border-b border-slate-100"></th>
+                        <th className="py-8 px-10 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em]">Payment</th>
+                        <th className="py-8 px-10"></th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
-                      {bookings.slice(0, 6).map((booking) => (
+                      {(searchQuery ? filteredBookings : bookings).slice(0, 8).map((booking) => (
                         <tr key={booking.id} className="group hover:bg-white transition-all duration-500">
                           <td className="py-8 px-10">
                               <div className="flex items-center gap-6">
@@ -420,6 +373,19 @@ export default function Admin() {
                               {getStatusIcon(booking.status)}
                               {booking.status}
                             </div>
+                          </td>
+                          <td className="py-8 px-10">
+                            {booking.status === 'Confirmed' ? (
+                              <div className="flex items-center gap-2 text-emerald-500 font-black text-[9px] uppercase tracking-[0.2em] bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
+                                <ShieldCheck className="w-3.5 h-3.5" />
+                                Verified
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-2 text-slate-400 font-black text-[9px] uppercase tracking-[0.2em] bg-slate-50 px-3 py-1.5 rounded-full border border-slate-100">
+                                <Clock className="w-3.5 h-3.5" />
+                                Processing
+                              </div>
+                            )}
                           </td>
                           <td className="py-8 px-10 text-right">
                              <button className="p-4 bg-slate-50 hover:bg-[#1a0a0c] hover:text-brand-gold rounded-full text-slate-400 transition-all shadow-premium active:scale-95" title="View booking details" aria-label="View booking details">
@@ -536,8 +502,347 @@ export default function Admin() {
                        </div>
                     </div>
                  </div>
+                </div>
+            </div>
+         )}
+
+        {/* ── Reservations Ledger ── */}
+        {activeTab === 'bookings' && (
+          <div className="space-y-8 fade-up">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div>
+                <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">Global Reservations</h1>
+                <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Historical & Active Ledger Control</p>
+              </div>
+              <button 
+                onClick={() => setIsManualBookingOpen(true)}
+                className="px-8 py-4 bg-brand-gold text-brand-burgundy rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl hover:bg-brand-burgundy hover:text-white transition-all transform active:scale-95"
+              >
+                + Rapid Entry
+              </button>
+            </div>
+
+            <div className="bg-white/70 backdrop-blur-3xl rounded-[2.5rem] border border-white shadow-premium overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead>
+                    <tr className="bg-slate-50/50 border-b border-slate-100">
+                      <th className="py-6 px-8 text-[10px] uppercase font-black tracking-widest text-slate-400">Guest</th>
+                      <th className="py-6 px-8 text-[10px] uppercase font-black tracking-widest text-slate-400">Contacts</th>
+                      <th className="py-6 px-8 text-[10px] uppercase font-black tracking-widest text-slate-400">Room & Pricing</th>
+                      <th className="py-6 px-8 text-[10px] uppercase font-black tracking-widest text-slate-400">Status Control</th>
+                      <th className="py-6 px-8 text-[10px] uppercase font-black tracking-widest text-slate-400 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {filteredBookings.map((b) => (
+                      <tr key={b.id} className="hover:bg-slate-50/50 transition-colors group">
+                        <td className="py-6 px-8">
+                          <div className="font-serif font-black text-[#1a0a0c]">{b.guestName}</div>
+                          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">{b.id}</div>
+                        </td>
+                        <td className="py-6 px-8">
+                          <div className="text-xs font-bold text-slate-600">{b.email}</div>
+                          <div className="text-[10px] text-slate-400">{b.phone}</div>
+                        </td>
+                        <td className="py-6 px-8">
+                          <div className="text-xs font-bold text-slate-600 italic">{b.roomType}</div>
+                          <div className="text-[10px] font-black text-brand-gold uppercase">{b.amount.toLocaleString()} ETB</div>
+                        </td>
+                        <td className="py-6 px-8">
+                          <div className="flex gap-2">
+                            {['Confirmed', 'Pending', 'Cancelled'].map((s) => (
+                              <button 
+                                key={s}
+                                onClick={() => updateBookingStatus(b.id, s as any)}
+                                className={`px-3 py-1.5 rounded-lg text-[8px] font-black uppercase tracking-widest transition-all ${
+                                  b.status === s 
+                                    ? 'bg-[#1a0a0c] text-brand-gold shadow-lg scale-105' 
+                                    : 'bg-slate-100 text-slate-400 hover:bg-slate-200'
+                                }`}
+                              >
+                                {s}
+                              </button>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="py-6 px-8 text-right">
+                          <button 
+                            onClick={() => { if(window.confirm('Erase this record from ledger?')) deleteBooking(b.id); }}
+                            title="Delete Record"
+                            aria-label="Delete record"
+                            className="inline-flex w-10 h-10 rounded-xl bg-rose-50 text-rose-500 items-center justify-center hover:bg-rose-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── Room Inventory ── */}
+        {activeTab === 'rooms' && (
+          <div className="space-y-12 fade-up">
+            <div>
+              <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">Physical Inventory</h1>
+              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Room Availability & Rate Management</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {rooms.map((room) => (
+                <div key={room.id} className="bg-white/80 backdrop-blur-2xl overflow-hidden group border border-white rounded-[2.5rem] shadow-premium">
+                  <div className="h-48 relative overflow-hidden">
+                    <img src={room.image} alt={room.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-6 left-6">
+                      <div className="text-white font-serif font-black text-xl">{room.name}</div>
+                      <div className="text-brand-gold text-[10px] font-black uppercase tracking-[0.2em]">{room.type}</div>
+                    </div>
+                    <div className={`absolute top-6 right-6 px-4 py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest backdrop-blur-md border ${
+                      room.available ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-rose-500/20 text-rose-400 border-rose-500/30'
+                    }`}>
+                      {room.available ? 'Live' : 'Maintenance'}
+                    </div>
+                  </div>
+                  <div className="p-8 space-y-8">
+                    <div className="flex items-center justify-between">
+                      <div className="text-2xl font-serif font-black text-[#1a0a0c] italic">{room.price.toLocaleString()} <span className="text-[10px] text-slate-400 not-italic uppercase tracking-widest">ETB / Night</span></div>
+                    </div>
+                    <button 
+                      onClick={() => toggleRoomAvailability(room.id)}
+                      className={`w-full py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest transition-all ${
+                        room.available 
+                          ? 'bg-[#1a0a0c] text-brand-gold hover:bg-brand-burgundy hover:text-white' 
+                          : 'bg-emerald-500 text-white hover:bg-emerald-600'
+                      }`}
+                    >
+                      {room.available ? 'Mark as Out-of-Service' : 'Restore to Inventory'}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Guest Inquiries ── */}
+        {activeTab === 'messages' && (
+          <div className="space-y-12 fade-up">
+            <div>
+              <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">Digital Correspondence</h1>
+              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Guest Relations & Inquiry Inbox</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              {messages.map((msg) => (
+                <div key={msg.id} className={`bg-white/80 backdrop-blur-2xl p-10 rounded-[2.5rem] border border-white shadow-premium transition-all ${!msg.read ? 'ring-2 ring-brand-gold/30' : 'opacity-80'}`}>
+                  <div className="flex flex-col md:flex-row md:items-start justify-between gap-8">
+                    <div className="space-y-4 flex-1">
+                      <div className="flex items-center gap-4">
+                        <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-serif font-black ${!msg.read ? 'bg-brand-gold text-brand-burgundy' : 'bg-slate-100 text-slate-400'}`}>
+                          {msg.name.charAt(0)}
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-serif font-bold text-[#1a0a0c]">{msg.subject}</h3>
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{msg.name} • {msg.email}</p>
+                        </div>
+                      </div>
+                      <p className="text-slate-600 leading-relaxed font-light italic">{msg.message}</p>
+                    </div>
+                    <div className="flex md:flex-col gap-4">
+                      {!msg.read && (
+                        <button 
+                          onClick={() => markMessageAsRead(msg.id)}
+                          className="px-6 py-3 bg-brand-gold text-brand-burgundy rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-brand-burgundy hover:text-white transition-all shadow-lg"
+                        >
+                          Mark Viewed
+                        </button>
+                      )}
+                      <button 
+                         onClick={() => { if(window.confirm('Delete this message?')) deleteMessage(msg.id); }}
+                         className="px-6 py-3 bg-rose-50 text-rose-500 rounded-xl font-black text-[9px] uppercase tracking-widest hover:bg-rose-500 hover:text-white transition-all"
+                      >
+                        Purge
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {messages.length === 0 && (
+                <div className="py-32 text-center bg-white/40 backdrop-blur-md rounded-[3rem] border border-white">
+                  <Mail className="w-16 h-16 text-slate-100 mx-auto mb-6" />
+                  <p className="text-slate-400 font-serif font-bold italic text-xl">Inbox is vacant...</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Guest Ledger ── */}
+        {activeTab === 'guests' && (
+          <div className="space-y-12 fade-up">
+            <div>
+              <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">Guest Directory</h1>
+              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Executive Resident Management</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {Array.from(new Set(bookings.map(b => b.email))).map(email => {
+                const guest = bookings.find(b => b.email === email)!;
+                const guestBookings = bookings.filter(b => b.email === email);
+                return (
+                  <div key={email} className="bg-white/80 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white shadow-premium group hover:-translate-y-2 transition-all duration-500">
+                    <div className="flex items-center gap-6 mb-8">
+                       <div className="w-16 h-16 rounded-3xl bg-[#1a0a0c] text-brand-gold flex items-center justify-center font-serif font-black text-3xl shadow-2xl">
+                          {guest.guestName.charAt(0)}
+                       </div>
+                       <div>
+                          <h4 className="text-xl font-serif font-black text-[#1a0a0c] tracking-tight">{guest.guestName}</h4>
+                          <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">Verified Resident</span>
+                       </div>
+                    </div>
+                    <div className="space-y-4 mb-8">
+                       <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400 font-bold uppercase tracking-widest">Digital ID</span>
+                          <span className="text-[#1a0a0c] font-bold">{guest.email}</span>
+                       </div>
+                       <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400 font-bold uppercase tracking-widest">Total Stays</span>
+                          <span className="text-brand-burgundy font-black">{guestBookings.length} Visits</span>
+                       </div>
+                       <div className="flex items-center justify-between text-xs">
+                          <span className="text-slate-400 font-bold uppercase tracking-widest">Lifetime Value</span>
+                          <span className="text-emerald-600 font-black">{guestBookings.reduce((s, b) => s + b.amount, 0).toLocaleString()} <span className="text-[9px]">ETB</span></span>
+                       </div>
+                    </div>
+                    <button className="w-full py-4 bg-slate-50 text-[#1a0a0c] rounded-2xl font-black text-[10px] uppercase tracking-widest hover:bg-[#1a0a0c] hover:text-brand-gold transition-all">View Full Dossier</button>
+                  </div>
+                );
+              })}
+              {bookings.length === 0 && (
+                <div className="col-span-full py-32 text-center bg-white/40 backdrop-blur-md rounded-[3rem] border border-white">
+                  <p className="text-slate-400 font-serif font-bold italic text-xl">Directory is empty...</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── Subscriber Network ── */}
+        {activeTab === 'subscribers' && (
+          <div className="space-y-12 fade-up">
+            <div className="flex justify-between items-center">
+              <div>
+                <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">Digital Newsletter</h1>
+                <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Broadcast Distribution Network</p>
+              </div>
+              <button className="px-8 py-4 bg-[#1a0a0c] text-brand-gold rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-2xl hover:bg-brand-burgundy hover:text-white transition-all">
+                 Initialize Broadcast
+              </button>
+            </div>
+
+            <div className="bg-white/70 backdrop-blur-3xl rounded-[3rem] border border-white p-12 text-center shadow-premium">
+               <div className="max-w-md mx-auto py-12">
+                  <Bell className="w-16 h-16 text-brand-gold mx-auto mb-8 animate-bounce" />
+                  <h3 className="text-2xl font-serif font-black text-[#1a0a0c] mb-4 italic">No Active Subscribers Found</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-10">The subscription relay is currently idling. All new guest enrollments will appear here for marketing distribution.</p>
+                  <div className="flex justify-center gap-4">
+                     <div className="flex items-center gap-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                        <span className="w-2 h-2 rounded-full bg-slate-200" /> Relay: Ready
+                     </div>
+                     <div className="flex items-center gap-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                        <span className="w-2 h-2 rounded-full bg-slate-200" /> Database: Scanned
+                     </div>
+                  </div>
                </div>
-           </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── System Configuration ── */}
+        {activeTab === 'settings' && (
+          <div className="space-y-12 fade-up">
+            <div>
+              <h1 className="text-4xl font-serif font-black text-[#1a0a0c]">System Architecture</h1>
+              <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest mt-2">Core Infrastructure & Policy Control</p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+               {/* Lockdown Protocol */}
+               <div className="bg-white/80 backdrop-blur-2xl p-10 rounded-[3rem] border border-white shadow-premium relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-rose-500/5 rounded-full blur-[60px] pointer-events-none group-hover:scale-150 transition-transform duration-1000" />
+                  <div className="flex items-center gap-6 mb-10">
+                     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${isLockdownActive ? 'bg-rose-500 text-white animate-pulse' : 'bg-slate-100 text-slate-400'}`}>
+                        <AlertTriangle className="w-7 h-7" />
+                     </div>
+                     <div>
+                        <h3 className="text-2xl font-serif font-black text-[#1a0a0c]">Lockdown Protocol</h3>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Emergency Site Access Control</p>
+                     </div>
+                  </div>
+                  <p className="text-sm text-slate-500 mb-10 leading-relaxed italic">Activating this selector will temporarily suspend all public-facing reservations and navigation. Use only in emergency data synchronization scenarios.</p>
+                  <button 
+                    onClick={() => toggleLockdown()}
+                    className={`w-full py-5 rounded-[2rem] font-black text-[11px] uppercase tracking-[0.4em] transition-all duration-700 shadow-xl ${
+                      isLockdownActive 
+                        ? 'bg-emerald-500 text-white hover:bg-emerald-600' 
+                        : 'bg-rose-500 text-white hover:bg-[#1a0a0c] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]'
+                    }`}
+                  >
+                     {isLockdownActive ? 'Deactivate Sentinel Lockdown' : 'Authorize Emergency Lockdown'}
+                  </button>
+               </div>
+
+               {/* Infrastructure Audit */}
+               <div className="bg-[#1a0a0c] p-10 rounded-[3rem] shadow-[0_40px_100px_rgba(26,10,12,0.3)] border border-[#1a0a0c]/20">
+                  <h3 className="text-2xl font-serif font-black text-white mb-10 tracking-tight flex items-center justify-between">
+                     Infrastructure Status <span className="text-brand-gold text-[10px] uppercase font-black tracking-widest bg-white/5 py-1 px-3 rounded-lg border border-white/5 italic">Operational</span>
+                  </h3>
+                  <div className="space-y-6">
+                     {[
+                        { label: 'Supabase Relay', status: 'Healthy', color: 'emerald', delay: '12ms' },
+                        { label: 'Resend SMTP', status: 'Authorized', color: 'brand-gold', delay: '45ms' },
+                        { label: 'Chapa Gateway', status: 'Live', color: 'emerald', delay: '202ms' },
+                        { label: 'CDN Edge Nodes', status: 'Distributed', color: 'emerald', delay: '8ms' },
+                     ].map((item, i) => (
+                        <div key={i} className="flex items-center justify-between p-5 bg-white/5 rounded-2xl border border-white/5 group hover:bg-white/10 transition-all">
+                           <div className="flex items-center gap-4">
+                              <div className={`w-2.5 h-2.5 rounded-full ${item.status === 'Healthy' || item.status === 'Live' || item.status === 'Distributed' ? 'bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]' : 'bg-brand-gold shadow-[0_0_15px_rgba(196,164,132,0.5)]'}`} />
+                              <span className="text-sm font-bold text-white/80">{item.label}</span>
+                           </div>
+                           <div className="flex flex-col items-end">
+                              <span className={`text-[9px] font-black uppercase ${item.status === 'Healthy' || item.status === 'Live' || item.status === 'Distributed' ? 'text-emerald-400' : 'text-brand-gold'}`}>{item.status}</span>
+                              <span className="text-[8px] font-bold text-white/20">{item.delay}</span>
+                           </div>
+                        </div>
+                     ))}
+                  </div>
+               </div>
+
+               {/* Admin Identity Management */}
+               <div className="lg:col-span-2 bg-white/80 backdrop-blur-2xl p-12 rounded-[3.5rem] border border-white shadow-premium">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 mb-10">
+                     <div>
+                        <h3 className="text-3xl font-serif font-black text-[#1a0a0c]">Deauthorization & Identity</h3>
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Update Executive Access Credentials</p>
+                     </div>
+                     <div className="flex gap-4">
+                        <button className="px-10 py-5 bg-slate-50 text-[#1a0a0c] border border-slate-100 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:border-brand-gold transition-all">Request Audit Log</button>
+                        <button className="px-10 py-5 bg-[#1a0a0c] text-brand-gold rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-2xl hover:bg-brand-burgundy hover:text-white transition-all">Update Key Code</button>
+                     </div>
+                  </div>
+                  <div className="bg-rose-50/50 p-6 rounded-2xl border border-rose-100 flex items-center gap-4">
+                     <AlertTriangle className="w-5 h-5 text-rose-500" />
+                     <p className="text-[11px] text-rose-700 font-medium italic">Strict Warning: Credential rotation will invalidate all active executive sessions across all nodes and mobile instances.</p>
+                  </div>
+               </div>
+            </div>
+          </div>
         )}
       </main>
 

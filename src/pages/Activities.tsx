@@ -13,7 +13,7 @@ export default function Activities() {
       category: 'Safari',
       title: t('activities.items.lake.title'),
       description: t('activities.items.lake.desc'),
-      image: '/chamo_boat_trip.webp',
+      image: '/images/activities/chamoboattrip.webp',
       duration: '4-5 Hours',
       level: 'Easy'
     },
@@ -22,7 +22,7 @@ export default function Activities() {
       category: 'Nature',
       title: t('activities.items.park.title'),
       description: t('activities.items.park.desc'),
-      image: '/nechisar_park_1.jpg',
+      image: '/images/activities/nechisarpark1.webp',
       duration: 'Full Day',
       level: 'Moderate'
     },
@@ -31,7 +31,7 @@ export default function Activities() {
       category: 'Culture',
       title: t('activities.items.village.title'),
       description: t('activities.items.village.desc'),
-      image: '/dorze_village_1_1.png',
+      image: '/images/activities/dorzevillage11.webp',
       duration: '4 Hours',
       level: 'Easy'
     }
@@ -43,12 +43,12 @@ export default function Activities() {
         title="Safari & Rift Valley Adventures"
         description="Discover curated adventures from Arba Minch Wubeté Hotel — Lake Chamo boat safaris, Nechisar National Park tours, Dorze village cultural experiences & more."
         path="/activities"
-        image="https://wubetehotel.com/chamo_boat_trip.webp"
+        image="https://wubetehotel.com/images/activities/chamoboattrip.webp"
       />
       {/* ── Hero ── */}
       <section className="relative h-[65vh] min-h-[500px] overflow-hidden flex items-center">
         <div 
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/assets/nature_safari_hd.png)]"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/images/gallery/naturesafarihd.webp)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/90" />

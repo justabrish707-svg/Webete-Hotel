@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -6,7 +7,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-serve(async (req) => {
+serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
@@ -59,7 +60,7 @@ serve(async (req) => {
 
       const bookingId = `BK-${Date.now()}-${Math.random().toString(36).substring(2, 5).toUpperCase()}`;
 
-      await supabase.from('bookings').insert([{
+      const { error: insertError } = await supabase.from('bookings').insert([{
         id: bookingId,
         guest_name: String(guestName).slice(0, 100),
         email: String(email).slice(0, 200),
@@ -68,12 +69,16 @@ serve(async (req) => {
         check_out: checkOut,
         room_type: String(roomType || 'Room').slice(0, 100),
         guests: Math.min(Math.max(1, Number(guests) || 1), 10),
-        special_requests: String(specialRequests || '').slice(0, 500),
+        special_requests: String(specialRequests || '').slice(0, 500) + ` [TX_REF: ${txRef}]`,
         status: 'Confirmed',
         amount: verifiedAmount,
-        payment_ref: txRef,
         created_at: new Date().toISOString(),
       }]);
+
+      if (insertError) {
+        console.error('Failed to insert booking:', insertError);
+        throw new Error('Database insert failed');
+      }
 
       // Log payment event
       await supabase.from('system_logs').insert([{

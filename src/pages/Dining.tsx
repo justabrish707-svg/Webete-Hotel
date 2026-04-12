@@ -15,7 +15,7 @@ export default function Dining() {
       title: t('Traditional Agelgil') || 'Grand Heritage Platter',
       desc: 'A full spectrum of Ethiopian flavors: Doro Wat, Kitfo, and Gomen served on fresh Injera.',
       price: '550 ETB',
-      image: '/food Traditional_1.png',
+      image: '/images/dining/foodtraditional1.webp',
       tag: 'Chef\'s Signature',
       info: 'Organic Teff • Spicy • Serves 2',
       calories: '1120 kcal',
@@ -26,7 +26,7 @@ export default function Dining() {
       title: t('grilled fish') || 'Rift Valley Tilapia',
       desc: 'Whole grilled fish from Lake Chamo, marinated in local herbs and Berbere spice.',
       price: '420 ETB',
-      image: '/grilled-fish.jpg',
+      image: '/images/dining/grilled-fish.webp',
       tag: 'Fresh Catch',
       info: 'Lakeside • Grilled • Low Carb',
       calories: '450 kcal',
@@ -37,7 +37,7 @@ export default function Dining() {
       title: 'Aged Ribeye Steak',
       desc: '28-day dry-aged premium beef served with a velvety red wine reduction and truffle-infused mash.',
       price: '850 ETB',
-      image: '/assets/menu/ribeye_steak_gourmet_1775139407503.png',
+      image: '/images/dining/ribeyesteakgourmet1775139407503.webp',
       tag: 'Premium Selection',
       info: 'Imported Beef • Gourmet • Wood-Fired',
       calories: '780 kcal',
@@ -48,7 +48,7 @@ export default function Dining() {
       title: 'Mediterranean Seafood Pasta',
       desc: 'Hand-crafted linguine tossed with jumbo prawns, cherry tomatoes, and cold-pressed olive oil.',
       price: '580 ETB',
-      image: '/assets/menu/mediterranean_pasta_premium_1775139434195.png',
+      image: '/images/dining/mediterraneanpastapremium1775139434195.webp',
       tag: 'House Favorite',
       info: 'Fresh Seafood • Garlic • Basil',
       calories: '620 kcal',
@@ -59,7 +59,7 @@ export default function Dining() {
       title: 'Wubeté Garden Harvest',
       desc: 'A vibrant medley of organic greens, roasted seeds, avocado, and a wild honey lemon zest.',
       price: '320 ETB',
-      image: '/assets/menu/gourmet_garden_salad_premium_1775139525823.png',
+      image: '/images/dining/gourmetgardensaladpremium1775139525823.webp',
       tag: 'Vibrant & Clean',
       info: 'Farm-to-Table • Vegan • Nutrient Rich',
       calories: '280 kcal',
@@ -70,7 +70,7 @@ export default function Dining() {
       title: 'Craft Honey Wine (Tej)',
       desc: 'Our award-winning traditional honey wine, matured in oak for a complex, floral finish.',
       price: '220 ETB',
-      image: '/assets/menu/honey_wine_tej_premium_1775139571356.png',
+      image: '/images/dining/honeywinetejpremium1775139571356.webp',
       tag: 'Heritage Brew',
       info: 'Highland Honey • Floral • Potent',
       calories: '210 kcal',
@@ -81,7 +81,7 @@ export default function Dining() {
       title: 'St. George Beer (330ml)',
       desc: 'Ethiopia’s oldest and most iconic premium lager with a crisp, refreshing finish.',
       price: '90 ETB',
-      image: '/st_george.jpg',
+      image: '/images/dining/stgeorge.webp',
       tag: 'Local Favorite',
       info: '330ml • Chilled • Lager',
       calories: '140 kcal',
@@ -92,7 +92,7 @@ export default function Dining() {
       title: 'Habesha Cold Gold (330ml)',
       desc: 'A rich and smooth golden lager known for its authentic Ethiopian brewing heritage.',
       price: '95 ETB',
-      image: '/habesha_beer.jpg.webp',
+      image: '/images/dining/habeshabeerjpg.webp',
       tag: 'Premium Brew',
       info: '330ml • Golden • Smooth',
       calories: '145 kcal',
@@ -103,7 +103,7 @@ export default function Dining() {
       title: 'Harar Beer (330ml)',
       desc: 'A distinctively balanced brew from the historical region of Harar.',
       price: '85 ETB',
-      image: '/harar_beer.jpg.jpg',
+      image: '/images/dining/hararbeerjpg.webp',
       tag: 'Heritage Brew',
       info: '330ml • Balanced • Crisp',
       calories: '135 kcal',
@@ -114,7 +114,7 @@ export default function Dining() {
       title: 'Bedele Beer (330ml)',
       desc: 'A bright, mildly hopped pilsner that offers a perfectly refreshing and light taste.',
       price: '85 ETB',
-      image: '/bedele_beer.jpg',
+      image: '/images/dining/bedelebeer.webp',
       tag: 'Refreshing Choice',
       info: '330ml • Pilsner • Light',
       calories: '130 kcal',
@@ -125,7 +125,7 @@ export default function Dining() {
       title: 'Sen\'q Malt (330ml)',
       desc: 'A rich, dark and non-alcoholic malt beverage full of authentic energy.',
       price: '80 ETB',
-      image: '/sen\'q malt.jpg',
+      image: '/images/dining/senq-malt.webp',
       tag: 'Malt Boost',
       info: '330ml • Dark • Rich',
       calories: '180 kcal',
@@ -148,12 +148,12 @@ export default function Dining() {
         title="Traditional Dining & Fine Cuisine"
         description="Savour authentic Ethiopian flavours and international gourmet cuisine at Wubeté Hotel's restaurant. Lake Chamo tilapia, Agelgil platters & daily coffee ceremony."
         path="/dining"
-        image="https://wubetehotel.com/food_traditional_2.jpg"
+        image="https://wubetehotel.com/images/dining/foodtraditional2.webp"
       />
       {/* ── Cinematic Hero ── */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden flex items-center">
         <div
-          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/assets/dining_hd.png)]"
+          className="absolute inset-0 bg-cover bg-center scale-105 animate-[ken-burns_25s_ease-infinite_alternate] bg-[url(/images/gallery/dininghd.webp)]"
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-burgundy/30 to-brand-burgundy/80" />
@@ -205,7 +205,7 @@ export default function Dining() {
             <div className="relative fade-up group">
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(45,17,21,0.3)] border-8 border-white">
                 <img
-                  src="/spacial_kurt.png"
+                  src="/images/dining/spacialkurt.webp"
                   alt="Traditional Plating"
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110"
                 />
@@ -371,7 +371,7 @@ export default function Dining() {
         <div className="absolute inset-0 ethiopian-pattern opacity-[0.03]" />
         <div className="absolute inset-0">
           <img 
-            src="/traditional_food_detail.jpg" 
+            src="/images/dining/traditionalfooddetail.webp" 
             className="w-full h-full object-cover opacity-10 scale-110 blur-[3px]" 
             alt="Coffee Legend" 
             loading="lazy"
