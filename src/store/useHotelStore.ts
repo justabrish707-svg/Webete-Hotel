@@ -37,6 +37,31 @@ export interface Message {
   createdAt: string;
 }
 
+interface SupabaseBooking {
+  id: string;
+  guest_name: string;
+  email: string;
+  phone: string;
+  check_in: string;
+  check_out: string;
+  room_type: string;
+  guests: number;
+  special_requests: string;
+  status: 'Pending' | 'Confirmed' | 'Cancelled';
+  amount: number;
+  created_at: string;
+}
+
+interface SupabaseMessage {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  read: boolean;
+  created_at: string;
+}
+
 interface HotelState {
   isAuthenticated: boolean;
   login: (code: string) => Promise<boolean>;
@@ -124,7 +149,7 @@ export const useHotelStore = create<HotelState>()(
           const { data: bookingsData } = await supabase
             .from('bookings').select('*').order('created_at', { ascending: false });
           if (bookingsData) {
-            const mapped = (bookingsData as Record<string, any>[]).map(b => ({
+            const mapped = (bookingsData as SupabaseBooking[]).map(b => ({
               id: b.id,
               guestName: b.guest_name,
               email: b.email,
@@ -145,7 +170,7 @@ export const useHotelStore = create<HotelState>()(
           const { data: messagesData } = await supabase
             .from('messages').select('*').order('created_at', { ascending: false });
           if (messagesData) {
-            const mapped = (messagesData as Record<string, any>[]).map(m => ({
+            const mapped = (messagesData as SupabaseMessage[]).map(m => ({
               id: m.id,
               name: m.name,
               email: m.email,
@@ -168,7 +193,7 @@ export const useHotelStore = create<HotelState>()(
           supabase
             .channel('public:bookings')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'bookings' }, payload => {
-              const b = payload.new as any;
+              const b = payload.new as SupabaseBooking;
               const newBooking: Booking = {
                 id: b.id,
                 guestName: b.guest_name,
@@ -191,7 +216,7 @@ export const useHotelStore = create<HotelState>()(
           supabase
             .channel('public:messages')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
-              const m = payload.new as any;
+              const m = payload.new as SupabaseMessage;
               const newMsg: Message = {
                 id: m.id,
                 name: m.name,

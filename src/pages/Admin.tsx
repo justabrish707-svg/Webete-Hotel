@@ -23,7 +23,7 @@ import {
   Mail
 } from 'lucide-react';
 
-import { useHotelStore } from '../store/useHotelStore';
+import { useHotelStore, type Booking } from '../store/useHotelStore';
 import { useNavigate } from 'react-router-dom';
 
 export default function Admin() {
@@ -81,7 +81,7 @@ export default function Admin() {
     });
   };
 
-  const exportToCSV = (data: any[], filename: string) => {
+  const exportToCSV = <T extends Record<string, string | number | boolean | null | undefined>>(data: T[], filename: string) => {
     if (!data.length) return;
     const headers = Object.keys(data[0]);
     const csvRows = [
@@ -554,7 +554,7 @@ export default function Admin() {
                             {['Confirmed', 'Pending', 'Cancelled'].map((s) => (
                               <button 
                                 key={s}
-                                onClick={() => updateBookingStatus(b.id, s as any)}
+                                onClick={() => updateBookingStatus(b.id, s as Booking['status'])}
                                 className={`px-3 py-1.5 rounded-lg text-[8px] font-black uppercase tracking-widest transition-all ${
                                   b.status === s 
                                     ? 'bg-[#1a0a0c] text-brand-gold shadow-lg scale-105' 

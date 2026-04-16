@@ -10,12 +10,12 @@ const variants = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as any },
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
   },
   exit: {
     opacity: 0,
     y: -10,
-    transition: { duration: 0.25, ease: [0.7, 0, 0.84, 0] as any },
+    transition: { duration: 0.25, ease: [0.7, 0, 0.84, 0] as [number, number, number, number] },
   },
 };
 
